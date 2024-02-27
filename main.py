@@ -1,5 +1,6 @@
-import pandas as pd
 import xml.etree.ElementTree as ET
+from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
 
 def find_text(root, namespace, path):
     try:
@@ -7,7 +8,7 @@ def find_text(root, namespace, path):
     except AttributeError:
         return None
 
-xml_path = 'C:\\Users\\User\\Downloads\\TesteXml\\35190104774509000142550050000603691000603697-nfe.xml'
+xml_path = 'C:\\Users\\User\\Downloads\\TesteXml\\35190104774509000142550050000603701000603701-nfe.xml'
 tree = ET.parse(xml_path)
 root = tree.getroot()
 
@@ -37,21 +38,26 @@ column_mapping = {
     'cPais': 'Codigo Pais',
     'nro': 'Numero'
 }
-
 # Caminho para o arquivo Excel existente
-excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI.xlsx'
+excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1).xlsx'
 
-# Carrega a planilha existente para um DataFrame
-df = pd.read_excel(excel_path)
+# Carrega a planilha existente
+wb = load_workbook(filename=excel_path)
+ws = wb.active
 
-# Cria um novo DataFrame com os dados do XML mapeados para as colunas correspondentes
-new_row = {column_mapping[key]: value for key, value in data.items()}
-new_df = pd.DataFrame([new_row])
+# Adiciona os dados do XML à próxima linha disponível na planilha
+next_row = ws.max_row + 1
 
-# Adiciona a nova linha ao final do DataFrame original, mantendo as colunas existentes
-df = pd.concat([df, new_df], ignore_index=True, sort=False)
+# Procura a correspondência de coluna na primeira linha da planilha
+for key, value in data.items():
+    column_name = column_mapping.get(key)
+    if column_name:
+        for cell in ws[1]:
+            if cell.value == column_name:
+                ws[f"{cell.column_letter}{next_row}"] = value
+                break
 
-# Salva o DataFrame atualizado de volta para o arquivo Excel
-df.to_excel(excel_path, index=False)
+# Salva as alterações de volta para o arquivo Excel
+wb.save(excel_path)
 
-print("Nova linha adicionada com sucesso ao arquivo Excel existente.")
+print("Dados adicionados com sucesso à planilha existente.")
