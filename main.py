@@ -38,17 +38,13 @@ column_mapping = {
     'cPais': 'Codigo Pais',
     'nro': 'Numero'
 }
-# Caminho para o arquivo Excel existente
 excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1).xlsx'
 
-# Carrega a planilha existente
 wb = load_workbook(filename=excel_path)
 ws = wb.active
 
-# Adiciona os dados do XML à próxima linha disponível na planilha
 next_row = ws.max_row + 1
 
-# Procura a correspondência de coluna na primeira linha da planilha
 for key, value in data.items():
     column_name = column_mapping.get(key)
     if column_name:
@@ -57,7 +53,6 @@ for key, value in data.items():
                 ws[f"{cell.column_letter}{next_row}"] = value
                 break
 
-# Salva as alterações de volta para o arquivo Excel
 wb.save(excel_path)
 
-print("Dados adicionados com sucesso à planilha existente.")
+print("Dados adicionados com sucesso à planilha.")
