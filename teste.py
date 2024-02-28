@@ -34,7 +34,7 @@ def find_text(root, namespace, path):
 
 def buscar_em_pasta(pasta):
     # Caminho para o arquivo Excel existente
-    excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1).xlsx'
+    excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(Final).xlsx'
     # Mapeamento de colunas
     column_mapping = {
         'xNome': 'Nome Completo',
@@ -76,6 +76,10 @@ def buscar_em_pasta(pasta):
 
     print("Dados dos arquivos XML adicionados com sucesso à planilha existente.")
 
-# Substitua 'caminho/para/sua/pasta' pelo caminho da sua pasta principal
-pasta_principal = 'C:\\Users\\User\\Downloads\\RaizTesteXml'
-buscar_em_pasta(pasta_principal)
+# Percorre todas as pastas de 201901 até 202402
+for ano in range(2019, 2025):
+    for mes in range(1, 13):
+        nome_pasta = f"{ano}{mes:02d}"
+        pasta_atual = os.path.join('C:\\Users\\User\\Downloads\\RaizTesteXml', nome_pasta)
+        if os.path.exists(pasta_atual):
+            buscar_em_pasta(pasta_atual)
