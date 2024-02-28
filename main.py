@@ -1,4 +1,5 @@
 import os
+import re
 import xml.etree.ElementTree as ET
 from openpyxl import load_workbook
 
@@ -23,6 +24,12 @@ def extrair_informacao_xml(arquivo_xml):
             'cPais': find_text(root, ns, './/nfe:dest/nfe:enderDest/nfe:cPais'),
             'nro': find_text(root, ns, './/nfe:dest/nfe:enderDest/nfe:nro')
         }
+        # Verifica se o endereço contém uma vírgula seguida de um número
+        if ',' in data['xLgr']:
+            numero_match = re.search(r',\s*(\d+)\s*$', data['xLgr'])
+            if numero_match:
+                data['nro'] = numero_match.group(1)
+
         return data
     except ET.ParseError:
         return None
