@@ -58,15 +58,28 @@ def buscar_em_pasta(pasta):
                 caminho_arquivo = os.path.join(pasta_atual, arquivo)
                 data = extrair_informacao_xml(caminho_arquivo)
                 if data:
-                    next_row = ws.max_row + 1
-                    # Procura a correspondência de coluna na primeira linha da planilha
-                    for key, value in data.items():
-                        column_name = column_mapping.get(key)
-                        if column_name:
-                            for cell in ws[1]:
-                                if cell.value == column_name:
-                                    ws[f"{cell.column_letter}{next_row}"] = value
-                                    break
+                    cnpj = data['cnpj']
+                    for row in ws.iter_rows(min_row=2, max_col=1, max_row=ws.max_row, values_only=True):
+                        if row[0] == cnpj:
+                            for key, value in data.items():
+                                column_name = column_mapping.get(key)
+                                if column_name:
+                                    for cell in ws[1]:
+                                        if cell.value == column_name:
+                                            col_letter = cell.column_letter
+                                            ws[f"{col_letter}{row[0].row}"] = value
+                                            break
+                            break
+                    else:
+                        next_row = ws.max_row + 1
+                        for key, value in data.items():
+                            column_name = column_mapping.get(key)
+                            if column_name:
+                                for cell in ws[1]:
+                                    if cell.value == column_name:
+                                        col_letter = cell.column_letter
+                                        ws[f"{col_letter}{next_row}"] = value
+                                        break
     wb.save(excel_path)
 
     print("Dados dos arquivos XML adicionados com sucesso à planilha.")
@@ -77,3 +90,5 @@ for ano in range(2019, 2025):
         pasta_atual = os.path.join('C:\\Users\\User\\Downloads\\RaizTesteXml', nome_pasta)
         if os.path.exists(pasta_atual):
             buscar_em_pasta(pasta_atual)
+
+# fazer a tratativa para quando o número estiver junto com endereço
