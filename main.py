@@ -2,9 +2,10 @@ import os
 import xml.etree.ElementTree as ET
 from openpyxl import load_workbook
 
+# Percorre pastas com nomes personalizados, identifica os arquivos xml, captura somente os dados desejados
+# contidos nas tags e os salva em uma planilha
 def extrair_informacao_xml(arquivo_xml):
     try:
-        # Tentar analisar o arquivo XML
         tree = ET.parse(arquivo_xml)
         root = tree.getroot()
 
@@ -33,9 +34,8 @@ def find_text(root, namespace, path):
         return None
 
 def buscar_em_pasta(pasta):
-    # Caminho para o arquivo Excel existente
     excel_path = 'C:\\Users\\User\\Documents\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(Final).xlsx'
-    # Mapeamento de colunas
+
     column_mapping = {
         'xNome': 'Nome Completo',
         'fone': 'Fone',
@@ -48,20 +48,16 @@ def buscar_em_pasta(pasta):
         'cPais': 'Codigo Pais',
         'nro': 'Numero'
     }
-    # Carrega a planilha existente
+
     wb = load_workbook(filename=excel_path)
     ws = wb.active
 
     for pasta_atual, _, arquivos in os.walk(pasta):
         for arquivo in arquivos:
-            # Verificar se o arquivo é um arquivo XML
             if arquivo.endswith('.xml'):
-                # Construir o caminho completo do arquivo
                 caminho_arquivo = os.path.join(pasta_atual, arquivo)
-                # Extrair informações do arquivo XML
                 data = extrair_informacao_xml(caminho_arquivo)
                 if data:
-                    # Adiciona os dados do XML à próxima linha disponível na planilha
                     next_row = ws.max_row + 1
                     # Procura a correspondência de coluna na primeira linha da planilha
                     for key, value in data.items():
@@ -71,12 +67,10 @@ def buscar_em_pasta(pasta):
                                 if cell.value == column_name:
                                     ws[f"{cell.column_letter}{next_row}"] = value
                                     break
-    # Salva as alterações de volta para o arquivo Excel
     wb.save(excel_path)
 
-    print("Dados dos arquivos XML adicionados com sucesso à planilha existente.")
+    print("Dados dos arquivos XML adicionados com sucesso à planilha.")
 
-# Percorre todas as pastas de 201901 até 202402
 for ano in range(2019, 2025):
     for mes in range(1, 13):
         nome_pasta = f"{ano}{mes:02d}"
