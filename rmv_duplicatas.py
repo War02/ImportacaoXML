@@ -7,4 +7,4 @@ def remover_duplicatas_pelo_cnpj(planilha_path):
 
     planilha_sem_duplicatas.to_excel(planilha_path, index=False)
 
-remover_duplicatas_pelo_cnpj('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1) - Copia.xlsx')
+remover_duplicatas_pelo_cnpj('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1) - Principal.xlsx')
