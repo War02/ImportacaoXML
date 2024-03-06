@@ -8,9 +8,9 @@ def insere_codigo(planilha_principal_path, planilha_geral_path):
 
     codigos_clientes = []
     for cnpj in planilha_principal['CNPJ_CPF']:
-        linha_correspondente = planilha_geral[planilha_geral['CNPJ'] == cnpj]
+        linha_correspondente = planilha_geral[planilha_geral['CNPJ_CPF'] == cnpj]
         if not linha_correspondente.empty:
-            codigo_cliente = linha_correspondente.iloc[0]['CODIGO']
+            codigo_cliente = linha_correspondente.iloc[0]['NomeCompleto']
             codigos_clientes.append(codigo_cliente)
         else:
             codigos_clientes.append(None)

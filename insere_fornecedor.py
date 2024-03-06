@@ -31,4 +31,6 @@ mapeamento_fornecedores = {
     'CNPJ': 11
 }
 
-copiar_dados('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\FORNECEDORES.xlsx', 'C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1) - Principal.xlsx', mapeamento_fornecedores, 2)
+
+
+copiar_dados('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\FORNECEDORES.xlsx', 'C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\Base Para NomeCompleto.xlsx', mapeamento_fornecedores, 2)
