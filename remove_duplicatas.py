@@ -1,5 +1,7 @@
 import pandas as pd
 
+# Busca remover duplicatas, tomando como base o CNPJ
+
 def remover_duplicatas_pelo_cnpj(planilha_path):
     planilha = pd.read_excel(planilha_path)
 

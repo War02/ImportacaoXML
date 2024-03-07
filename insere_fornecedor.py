@@ -1,5 +1,7 @@
 from openpyxl import load_workbook
 
+# Busca pelos fornecedores na planilha referente e os adiciona na planilha principal
+
 def copiar_dados(planilha_origem_path, planilha_destino_path, mapeamento_fornecedores, linha_inicial):
     wb_origem = load_workbook(filename=planilha_origem_path)
     ws_origem = wb_origem.active
@@ -30,7 +32,5 @@ mapeamento_fornecedores = {
     'CEP': 10,
     'CNPJ': 11
 }
-
-
 
 copiar_dados('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\FORNECEDORES.xlsx', 'C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\Base Para NomeCompleto.xlsx', mapeamento_fornecedores, 2)
