@@ -1,5 +1,7 @@
 import pandas as pd
 
+# Remove as vírgulas dos endereços
+
 df = pd.read_excel('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1) - Principal - Copia.xlsx')
 
 df['Endereco'] = df['Endereco'].str.split(',', expand=True)[0]
