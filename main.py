@@ -3,7 +3,7 @@ import re
 import xml.etree.ElementTree as ET
 from openpyxl import load_workbook
 
-
+# Extrai os dados desejados do XML e os salva na planilha principal de importação
 def extrair_informacao_xml(arquivo_xml):
     try:
         # Tentar analisar o arquivo XML

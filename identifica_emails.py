@@ -2,6 +2,7 @@ import pandas as pd
 
 # Busca na planilha principal, pelo código da empresa e, o compara com outra planilha para dectar o e-mail do responsavel
 # salvando as informações em uma nova planilha
+
 try:
     planilha_empresas = pd.read_excel('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI - TESTE.xlsx')
     planilha_emails = pd.read_excel('\\\\192.168.10.51\\Dados\\Departamental\\TI\\!CIGAM\\Migracao\\Dados Coletados para Migração\\EMAILFORNECEDORES.xlsx')
