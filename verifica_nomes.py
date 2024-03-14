@@ -25,4 +25,4 @@ def comparar_nome(planilha1_path, planilha2_path):
         for nome in nome_somente_planilha1:
             print(nome)
 
-comparar_nome('C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1).xlsx', 'C:\\Users\\User\\Documents\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI(1) - Copia.xlsx')
+comparar_nome('\\\\192.168.10.51\\Dados\\Departamental\\TI\\!CIGAM\\Migracao\\Dados Usados para Migração\\Docs - Importacao - Cigam\\EMPRESAS_MODELOONDEPERMANECE O COD ANTERI - PRINCIPAL - Copia.xlsx', '\\\\192.168.10.51\\Dados\\Departamental\\TI\\!CIGAM\\Migracao\\Dados Coletados para Migração\\Inscricao.xlsx')
